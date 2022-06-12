@@ -25,6 +25,7 @@ function c2519690.initial_effect(c)
 	e3:SetOperation(c2519690.posop)
 	c:RegisterEffect(e3)
 end
+c2519690.material_setcode=0xbd
 function c2519690.thfilter(c)
 	return c:IsCode(49328340) and c:IsAbleToHand()
 end

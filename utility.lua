@@ -1920,7 +1920,7 @@ function Auxiliary.PendOperation()
 				end
 				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 				Auxiliary.GCheckAdditional=Auxiliary.PendOperationCheck(ft1,ft2,ft)
-				local g=tg:SelectSubGroup(tp,aux.TRUE,true,1,math.min(#tg,ft))
+				local g=tg:SelectSubGroup(tp,Auxiliary.extralocationlimit,true,1,math.min(#tg,ft))
 				Auxiliary.GCheckAdditional=nil
 				if not g then return end
 				if ce then
@@ -1933,6 +1933,12 @@ function Auxiliary.PendOperation()
 				Duel.HintSelection(Group.FromCards(c))
 				Duel.HintSelection(Group.FromCards(rpz))
 			end
+end
+function Auxiliary.extralocationlimit(g)
+	return g:FilterCount(Auxiliary.extralocation,nil)<=1
+end
+function Auxiliary.extralocation(c)
+	return c:GetLocation()==LOCATION_EXTRA 
 end
 --enable revive limit for monsters that are also pendulum sumonable from certain locations (Odd-Eyes Revolution Dragon)
 function Auxiliary.EnableReviveLimitPendulumSummonable(c, loc)

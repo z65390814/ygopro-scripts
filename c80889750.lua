@@ -30,6 +30,8 @@ function c80889750.initial_effect(c)
 	e4:SetOperation(c80889750.indop)
 	c:RegisterEffect(e4)
 end
+c80889750.material_setcode={0xa9,0xc3,0xad}
+
 function c80889750.mfilter1(c)
 	return c:IsFusionSetCard(0xad) and c:IsFusionType(TYPE_FUSION)
 end

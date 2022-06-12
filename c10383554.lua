@@ -22,6 +22,7 @@ function c10383554.initial_effect(c)
 	e2:SetOperation(c10383554.operation)
 	c:RegisterEffect(e2)
 end
+c10383554.material_setcode=0xa9
 function c10383554.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return not e:GetHandler():IsDirectAttacked() end
 	local e1=Effect.CreateEffect(e:GetHandler())

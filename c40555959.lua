@@ -1,5 +1,6 @@
 --ハンドレス・フェイク
 function c40555959.initial_effect(c)
+	aux.AddSetNameMonsterList(c,0xb)
 	--Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)

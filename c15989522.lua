@@ -30,6 +30,7 @@ function c15989522.initial_effect(c)
 	e3:SetOperation(c15989522.atkop)
 	c:RegisterEffect(e3)
 end
+c15989522.material_setcode=0xbd
 function c15989522.ffilter2(c)
 	return c:IsLevel(5) and c:IsRace(RACE_DRAGON)
 end
