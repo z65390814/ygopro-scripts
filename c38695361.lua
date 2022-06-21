@@ -1,5 +1,6 @@
 --混沌の使者
 function c38695361.initial_effect(c)
+	aux.AddCodeList(c,5405694)
 	--atkup
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(38695361,0))

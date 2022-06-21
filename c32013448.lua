@@ -1,5 +1,6 @@
 --宵闇の騎士
 function c32013448.initial_effect(c)
+	aux.AddCodeList(c,5405694)
 	--gain
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)

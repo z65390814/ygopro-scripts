@@ -1,5 +1,6 @@
 --疾走の暗黒騎士ガイア
 function c7841921.initial_effect(c)
+	aux.AddCodeList(c,5405694)
 	--summon with no tribute
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(7841921,0))

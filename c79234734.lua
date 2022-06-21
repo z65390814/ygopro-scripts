@@ -1,5 +1,6 @@
 --超戦士の魂
 function c79234734.initial_effect(c)
+	aux.AddCodeList(c,5405694)
 	--atk
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_ATKCHANGE)

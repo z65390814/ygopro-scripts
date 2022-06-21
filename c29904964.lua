@@ -1,5 +1,6 @@
 --覚醒の暗黒騎士ガイア
 function c29904964.initial_effect(c)
+	aux.AddCodeList(c,5405694)
 	--summon with no tribute
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(29904964,0))
