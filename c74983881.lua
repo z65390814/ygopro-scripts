@@ -11,10 +11,10 @@ function c74983881.initial_effect(c)
 	e1:SetCost(c74983881.spcost)
 	e1:SetTarget(c74983881.sptg)
 	e1:SetOperation(c74983881.spop)
-	c:RegisterEffect(e1)
+	c:RegisterEffect(e1)main
 end
 function c74983881.spcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetCurrentPhase()==PHASE_MAIN2
+	return Duel.GetCurrentPhase()==PHASE_BATTLE
 end
 function c74983881.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckLPCost(tp,500) end
