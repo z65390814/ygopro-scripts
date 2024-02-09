@@ -75,7 +75,7 @@ end
 function c94821366.eqop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 then return end
-	if not tc:IsFaceup() or not tc:IsRelateToEffect(e) or tc:IsControler(tp) then return end
+	if tc:IsFacedown() or not tc:IsRelateToEffect(e) or tc:IsControler(tp) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
 	local sg=Duel.SelectMatchingCard(tp,c94821366.eqfilter2,tp,LOCATION_DECK,0,1,1,nil)
 	local sc=sg:GetFirst()
@@ -99,7 +99,7 @@ function c94821366.costfilter(c)
 end
 function c94821366.descost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c94821366.costfilter,tp,LOCATION_GRAVE,0,1,nil) end
-	local rt=Duel.GetTargetCount(nil,tp,0,LOCATION_ONFIELD,1,nil)
+	local rt=Duel.GetTargetCount(nil,tp,0,LOCATION_ONFIELD,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 	local g=Duel.SelectMatchingCard(tp,c94821366.costfilter,tp,LOCATION_GRAVE,0,1,rt,nil)
 	local cg=Duel.Remove(g,POS_FACEUP,REASON_COST)

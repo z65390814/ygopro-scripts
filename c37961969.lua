@@ -69,13 +69,12 @@ function c37961969.target(e,tp,eg,ep,ev,re,r,rp,chk)
 		end
 		return res
 	end
-	e:GetHandler():RegisterFlagEffect(99456344,RESET_EVENT+RESETS_STANDARD+RESET_CHAIN,0,1)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 function c37961969.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local chkf=tp
-	if not c:IsRelateToEffect(e) or c:GetFlagEffect(99456344)==0 or c:IsImmuneToEffect(e) then return end
+	if not c:IsRelateToChain() or c:IsImmuneToEffect(e) then return end
 	local mg=Duel.GetMatchingGroup(aux.NecroValleyFilter(c37961969.filter0),tp,LOCATION_HAND+LOCATION_MZONE+LOCATION_GRAVE,0,nil,e)
 	local sg1=Duel.GetMatchingGroup(c37961969.filter1,tp,LOCATION_EXTRA,0,nil,e,tp,mg,nil,chkf)
 	local mg2=nil
@@ -100,19 +99,7 @@ function c37961969.activate(e,tp,eg,ep,ev,re,r,rp)
 				local cg=mat1:Filter(c37961969.fdfilter,nil)
 				Duel.ConfirmCards(1-tp,cg)
 			end
-			Duel.SendtoDeck(mat1,nil,SEQ_DECKTOP,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
-			local p=tp
-			for i=1,2 do
-				local dg=mat1:Filter(c37961969.seqfilter,nil,p)
-				if #dg>1 then
-					Duel.SortDecktop(tp,p,#dg)
-				end
-				for i=1,#dg do
-					local mg=Duel.GetDecktopGroup(p,1)
-					Duel.MoveSequence(mg:GetFirst(),SEQ_DECKBOTTOM)
-				end
-				p=1-tp
-			end
+			aux.PlaceCardsOnDeckBottom(tp,mat1,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
 			Duel.BreakEffect()
 			Duel.SpecialSummon(tc,SUMMON_TYPE_FUSION,tp,tp,false,false,POS_FACEUP)
 		else
@@ -125,7 +112,4 @@ function c37961969.activate(e,tp,eg,ep,ev,re,r,rp)
 end
 function c37961969.fdfilter(c)
 	return c:IsLocation(LOCATION_MZONE) and c:IsFacedown() or c:IsLocation(LOCATION_HAND)
-end
-function c37961969.seqfilter(c,tp)
-	return c:IsLocation(LOCATION_DECK) and c:IsControler(tp)
 end

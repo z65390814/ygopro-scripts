@@ -1,4 +1,5 @@
 --PSYフレームロード・Ω
+local s,id,o=GetID()
 function c74586817.initial_effect(c)
 	--synchro summon
 	aux.AddSynchroProcedure(c,nil,aux.NonTuner(nil),1)
@@ -52,15 +53,18 @@ end
 function c74586817.rmop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local g=Duel.GetFieldGroup(1-tp,LOCATION_HAND,0)
-	if g:GetCount()==0 or not c:IsRelateToEffect(e) or not c:IsFaceup() then return end
+	if g:GetCount()==0 or not c:IsRelateToEffect(e) or c:IsFacedown() then return end
 	local rs=g:RandomSelect(1-tp,1)
 	local rg=Group.FromCards(c,rs:GetFirst())
 	if Duel.Remove(rg,POS_FACEUP,REASON_EFFECT+REASON_TEMPORARY)~=0 then
 		local fid=c:GetFieldID()
 		local og=Duel.GetOperatedGroup()
+		if c:GetOriginalCode()~=id then
+			og:RemoveCard(c)
+		end
 		local oc=og:GetFirst()
 		while oc do
-			oc:RegisterFlagEffect(74586817,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_STANDBY+RESET_SELF_TURN,0,1,fid)
+			oc:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_STANDBY+RESET_SELF_TURN,0,1,fid)
 			oc=og:GetNext()
 		end
 		og:KeepAlive()

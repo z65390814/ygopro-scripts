@@ -66,7 +66,8 @@ function c87263576.splimit(e,c)
 	return not c:IsAttribute(ATTRIBUTE_DARK)
 end
 function c87263576.lkcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetTurnPlayer()~=tp
+	local ph=Duel.GetCurrentPhase()
+	return Duel.GetTurnPlayer()~=tp and (ph==PHASE_MAIN1 or ph==PHASE_MAIN2)
 end
 function c87263576.lkfilter(c,lc)
 	return c:IsRace(RACE_DRAGON) and c:IsLinkSummonable(nil,lc)
@@ -77,7 +78,7 @@ function c87263576.lktg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function c87263576.lkop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if c:IsControler(1-tp) or not c:IsRelateToEffect(e) then return end
+	if c:IsControler(1-tp) or not c:IsRelateToEffect(e) or c:IsFacedown() then return end
 	local g=Duel.GetMatchingGroup(c87263576.lkfilter,tp,LOCATION_EXTRA,0,nil,c)
 	if g:GetCount()>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)

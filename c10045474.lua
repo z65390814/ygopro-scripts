@@ -26,7 +26,7 @@ end
 function c10045474.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
-	if tc:IsFaceup() and tc:IsRelateToEffect(e) and not tc:IsDisabled() and not tc:IsImmuneToEffect(e) then
+	if tc:IsFaceup() and tc:IsRelateToEffect(e) and tc:IsCanBeDisabledByEffect(e) then
 		Duel.NegateRelatedChain(tc,RESET_TURN_SET)
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
@@ -46,7 +46,7 @@ function c10045474.activate(e,tp,eg,ep,ev,re,r,rp)
 			e4:SetTargetRange(LOCATION_SZONE,LOCATION_SZONE)
 			e4:SetTarget(c10045474.distg)
 			e4:SetReset(RESET_PHASE+PHASE_END)
-			e4:SetLabel(c:GetSequence())
+			e4:SetLabel(c:GetSequence(),c:GetFieldID())
 			Duel.RegisterEffect(e4,tp)
 			local e5=Effect.CreateEffect(c)
 			e5:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
@@ -68,15 +68,15 @@ function c10045474.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c10045474.distg(e,c)
-	local seq=e:GetLabel()
+	local seq,fid=e:GetLabel()
 	local tp=e:GetHandlerPlayer()
-	return c:IsType(TYPE_SPELL+TYPE_TRAP) and aux.GetColumn(c,tp)==seq
+	return c:IsType(TYPE_SPELL+TYPE_TRAP) and aux.GetColumn(c,tp)==seq and c:GetFieldID()~=fid
 end
 function c10045474.disop(e,tp,eg,ep,ev,re,r,rp)
 	local tseq=e:GetLabel()
-	local loc,seq=Duel.GetChainInfo(ev,CHAININFO_TRIGGERING_LOCATION,CHAININFO_TRIGGERING_SEQUENCE)
+	local controller,loc,seq=Duel.GetChainInfo(ev,CHAININFO_TRIGGERING_CONTROLER,CHAININFO_TRIGGERING_LOCATION,CHAININFO_TRIGGERING_SEQUENCE)
 	if loc&LOCATION_SZONE~=0 and seq<=4 and re:IsActiveType(TYPE_SPELL+TYPE_TRAP)
-		and ((rp==tp and seq==tseq) or (rp==1-tp and seq==4-tseq)) then
+		and ((controller==tp and seq==tseq) or (controller==1-tp and seq==4-tseq)) then
 		Duel.NegateEffect(ev)
 	end
 end

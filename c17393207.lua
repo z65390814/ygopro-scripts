@@ -19,11 +19,11 @@ end
 function c17393207.filter(c)
 	return c:IsCode(47355498) and c:IsAbleToHand()
 end
-function c17393207.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+function c17393207.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c17393207.filter,tp,LOCATION_DECK,0,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
-function c17393207.operation(e,tp,eg,ep,ev,re,r,rp,chk)
+function c17393207.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tg=Duel.GetFirstMatchingCard(c17393207.filter,tp,LOCATION_DECK,0,nil)
 	if tg then
 		Duel.SendtoHand(tg,nil,REASON_EFFECT)

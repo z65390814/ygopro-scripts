@@ -1,12 +1,13 @@
 --覇王門無限
 function c22211622.initial_effect(c)
+	aux.AddCodeList(c,13331639)
 	aux.EnablePendulumAttribute(c)
 	--splimit
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetRange(LOCATION_PZONE)
 	e1:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
-	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_CANNOT_NEGATE)
+	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_CAN_FORBIDDEN)
 	e1:SetTargetRange(1,0)
 	e1:SetCondition(c22211622.splimcon)
 	e1:SetTarget(c22211622.splimit)
@@ -82,7 +83,7 @@ function c22211622.spfilter(c,e,tp,dg)
 end
 function c22211622.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
-	if chkc then return chkc:IsLocation(LOCATION_ONFIELD) and chkc:IsControler(tp) and c22211622.desfilter(chkc,e,tp,c) and chkc~=c end
+	if chkc then return chkc:IsOnField() and chkc:IsControler(tp) and c22211622.desfilter(chkc,e,tp,c) and chkc~=c end
 	if chk==0 then return Duel.IsExistingTarget(c22211622.desfilter,tp,LOCATION_ONFIELD,0,1,c,e,tp,c) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 	local g=Duel.SelectTarget(tp,c22211622.desfilter,tp,LOCATION_ONFIELD,0,1,1,c,e,tp,c)

@@ -21,7 +21,7 @@ function c20277376.filter(c)
 	return c:IsRace(RACE_DRAGON) and c:IsAbleToHand()
 end
 function c20277376.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:GetLocation()==LOCATION_GRAVE and chkc:GetControler()==tp and c20277376.filter(chkc) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and c20277376.filter(chkc) end
 	if chk==0 then return Duel.IsExistingTarget(c20277376.filter,tp,LOCATION_GRAVE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 	local g=Duel.SelectTarget(tp,c20277376.filter,tp,LOCATION_GRAVE,0,1,1,nil)
@@ -29,7 +29,7 @@ function c20277376.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function c20277376.thop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	if tc:IsRelateToEffect(e) then
+	if tc:IsRelateToEffect(e) and tc:IsRace(RACE_DRAGON) then
 		Duel.SendtoHand(tc,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,tc)
 	end

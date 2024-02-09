@@ -7,7 +7,7 @@ function c22617205.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetRange(LOCATION_PZONE)
 	e2:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
-	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_CANNOT_NEGATE)
+	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_CAN_FORBIDDEN)
 	e2:SetTargetRange(1,0)
 	e2:SetTarget(c22617205.splimit)
 	c:RegisterEffect(e2)
@@ -28,6 +28,7 @@ function c22617205.initial_effect(c)
 	e5:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e5:SetCondition(c22617205.condition)
 	c:RegisterEffect(e5)
+	c22617205.star_knight_summon_effect=e3
 end
 function c22617205.splimit(e,c,sump,sumtype,sumpos,targetp)
 	if c:IsSetCard(0x9c,0xc4) then return false end

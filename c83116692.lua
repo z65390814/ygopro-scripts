@@ -1,4 +1,4 @@
---死眼の伝霊-プシュコポンポス
+--死眼の伝霊－プシュコポンポス
 function c83116692.initial_effect(c)
 	--banish
 	local e1=Effect.CreateEffect(c)
@@ -39,7 +39,7 @@ end
 function c83116692.rmtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 end
-function c83116692.rmop(e,tp,eg,ep,ev,re,r,rp,chk)
+function c83116692.rmop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local mc=Duel.GetMatchingGroupCount(Card.IsType,tp,0,LOCATION_GRAVE,nil,TYPE_MONSTER)
 	local sc=Duel.GetMatchingGroupCount(Card.IsType,tp,0,LOCATION_GRAVE,nil,TYPE_SPELL+TYPE_TRAP)

@@ -33,11 +33,11 @@ end
 function c65331686.thfilter(c)
 	return c:IsCode(24094653) and c:IsAbleToHand()
 end
-function c65331686.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+function c65331686.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c65331686.thfilter,tp,LOCATION_DECK,0,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
-function c65331686.thop(e,tp,eg,ep,ev,re,r,rp,chk)
+function c65331686.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 	local g=Duel.SelectMatchingCard(tp,c65331686.thfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if g:GetCount()>0 then

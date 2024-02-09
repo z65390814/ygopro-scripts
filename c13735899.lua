@@ -27,6 +27,7 @@ function c13735899.initial_effect(c)
 	e3:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_CARD_TARGET)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetCountLimit(1,13735899)
+	e3:SetCondition(c13735899.remcon)
 	e3:SetTarget(c13735899.remtg)
 	e3:SetOperation(c13735899.remop)
 	c:RegisterEffect(e3)
@@ -34,21 +35,28 @@ end
 function c13735899.atkval(e)
 	return Duel.GetFieldGroupCount(e:GetHandlerPlayer(),LOCATION_REMOVED,0)*-100
 end
-function c13735899.cfilter(c,e,rc)
-	return c:IsFaceup() and (c:GetOriginalRace()==rc:GetOriginalRace() or c==rc)
+function c13735899.cfilter(c,e)
+	local typ,se=c:GetSpecialSummonInfo(SUMMON_INFO_TYPE,SUMMON_INFO_REASON_EFFECT)
+	if not se then return false end
+	local sc=se:GetHandler()
+	return typ&TYPE_MONSTER~=0 and se:IsActivated()
+		and c:IsFaceup() and (c:GetOriginalRace()==sc:GetOriginalRace() or c==sc)
 		and c:IsCanBeEffectTarget(e) and c:IsAbleToRemove()
+end
+function c13735899.remcon(e,tp,eg,ep,ev,re,r,rp)
+	return eg:IsExists(c13735899.cfilter,1,nil,e)
+		and not eg:IsContains(e:GetHandler())
 end
 function c13735899.rmfilter(c,tc)
 	return c:IsFaceup() and c:GetOriginalRace()==tc:GetOriginalRace()
 end
 function c13735899.remtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return eg:IsContains(chkc) and c13735899.cfilter(chkc,e,re:GetHandler()) end
-	if chk==0 then return re and re:IsActivated() and re:IsActiveType(TYPE_MONSTER)
-		and eg:IsExists(c13735899.cfilter,1,nil,e,re:GetHandler()) end
+	if chkc then return eg:IsContains(chkc) and c13735899.cfilter(chkc,e) end
+	if chk==0 then return true end
 	local tc=eg:GetFirst()
 	if #eg>1 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-		tc=eg:FilterSelect(tp,c13735899.cfilter,1,1,nil,e,re:GetHandler()):GetFirst()
+		tc=eg:FilterSelect(tp,c13735899.cfilter,1,1,nil,e):GetFirst()
 	end
 	Duel.SetTargetCard(tc)
 	local g=Duel.GetMatchingGroup(c13735899.rmfilter,tp,LOCATION_MZONE,LOCATION_MZONE,nil,tc)

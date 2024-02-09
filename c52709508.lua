@@ -91,7 +91,7 @@ function c52709508.damcon(e,tp,eg,ep,ev,re,r,rp)
 	local t=Duel.GetAttackTarget()
 	if ev==1 then t=Duel.GetAttacker() end
 	e:SetLabel(t:GetAttack())
-	return t:GetLocation()==LOCATION_GRAVE and t:IsType(TYPE_MONSTER)
+	return t:IsLocation(LOCATION_GRAVE) and t:IsType(TYPE_MONSTER)
 end
 function c52709508.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -116,8 +116,7 @@ function c52709508.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function c52709508.spop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	if tc:IsRelateToEffect(e) then
+	if tc:IsRelateToEffect(e) and tc:IsAttribute(ATTRIBUTE_LIGHT) then
 		Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEDOWN_DEFENSE)
-		Duel.ConfirmCards(1-tp,tc)
 	end
 end

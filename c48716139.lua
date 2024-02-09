@@ -32,6 +32,7 @@ function c48716139.initial_effect(c)
 	e4:SetOperation(c48716139.retop)
 	c:RegisterEffect(e4)
 end
+c48716139.has_text_type=TYPE_SPIRIT
 function c48716139.eqlimit(e,c)
 	return c:IsType(TYPE_SPIRIT)
 end
@@ -54,7 +55,7 @@ end
 function c48716139.retcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local ec=c:GetPreviousEquipTarget()
-	return c:IsReason(REASON_LOST_TARGET) and (ec:GetLocation()==LOCATION_HAND) and ec:IsPreviousControler(tp)
+	return c:IsReason(REASON_LOST_TARGET) and ec:IsLocation(LOCATION_HAND) and ec:IsPreviousControler(tp)
 end
 function c48716139.rettg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
