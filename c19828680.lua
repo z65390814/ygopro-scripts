@@ -1,5 +1,6 @@
 --煉獄の契約
 function c19828680.initial_effect(c)
+	aux.AddSetNameMonsterList(c,0xb)
 	--Special Summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_HANDES+CATEGORY_SPECIAL_SUMMON+CATEGORY_GRAVE_SPSUMMON)

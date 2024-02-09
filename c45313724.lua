@@ -1,5 +1,6 @@
 --煉獄の釜
 function c45313724.initial_effect(c)
+	aux.AddSetNameMonsterList(c,0xb)
 	Duel.EnableGlobalFlag(GLOBALFLAG_SELF_TOGRAVE)
 	--activate
 	local e0=Effect.CreateEffect(c)
